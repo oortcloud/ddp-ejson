@@ -1,6 +1,6 @@
 {
   "name": "ddp-ejson",
-  "version": "0.8.1-1",
+  "version": "0.8.1-2",
   "description": "Extended JSON as seen in Meteor and DDP",
   "main": "ejson.js",
   "scripts": {
