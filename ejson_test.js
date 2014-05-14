@@ -54,6 +54,8 @@ exports["test ObjectID custom type"] = function (test) {
   test.isTrue(_.isEqual(obj, roundTrip));
   obj = new EJSON.ObjectID("c896e40bf6e51bbdc9adcf59");
   test.equal("c896e40bf6e51bbdc9adcf59", obj.valueOf())
+  obj = EJSON.ObjectID("c896e40bf6e51bbdc9adcf59");
+  test.equal("c896e40bf6e51bbdc9adcf59", obj.valueOf())
 };
 
 exports["test ejson - some equality tests"] = function (test) {

@@ -33,6 +33,10 @@ looksLikeObjectID = function (str) {
 };
 
 ObjectID = function (hexString) {
+  // Make new optional
+  if (!(this instanceof ObjectID))
+    return new ObjectID(hexString);
+
   //random-based impl of Mongo ObjectID
   var self = this;
   if (hexString && (typeof hexString === 'string')) {
