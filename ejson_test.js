@@ -66,6 +66,32 @@ exports["test ejson - equality and falsiness"] = function (test) {
   test.isFalse(EJSON.equals({foo: "foo"}, undefined));
 };
 
+exports["test ejson - NaN and Inf"] = function (test) {
+  prepareTest(test);
+  test.equal(EJSON.parse("{\"$InfNaN\": 1}"), Infinity);
+  test.equal(EJSON.parse("{\"$InfNaN\": -1}"), -Infinity);
+  test.isTrue(_.isNaN(EJSON.parse("{\"$InfNaN\": 0}")));
+  test.equal(EJSON.parse(EJSON.stringify(Infinity)), Infinity);
+  test.equal(EJSON.parse(EJSON.stringify(-Infinity)), -Infinity);
+  test.isTrue(_.isNaN(EJSON.parse(EJSON.stringify(NaN))));
+  test.isTrue(EJSON.equals(NaN, NaN));
+  test.isTrue(EJSON.equals(Infinity, Infinity));
+  test.isTrue(EJSON.equals(-Infinity, -Infinity));
+  test.isFalse(EJSON.equals(Infinity, -Infinity));
+  test.isFalse(EJSON.equals(Infinity, NaN));
+  test.isFalse(EJSON.equals(Infinity, 0));
+  test.isFalse(EJSON.equals(NaN, 0));
+
+  test.isTrue(EJSON.equals(
+    EJSON.parse("{\"a\": {\"$InfNaN\": 1}}"),
+    {a: Infinity}
+  ));
+  test.isTrue(EJSON.equals(
+    EJSON.parse("{\"a\": {\"$InfNaN\": 0}}"),
+    {a: NaN}
+  ));
+};
+
 exports["test ejson - clone"] = function (test) {
   prepareTest(test);
   var cloneTest = function (x, identical) {
