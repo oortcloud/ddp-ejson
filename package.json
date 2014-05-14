@@ -1,6 +1,6 @@
 {
-  "name": "meteor-ejson",
-  "version": "0.6.3-1",
+  "name": "ddp-ejson",
+  "version": "0.8.1-1",
   "description": "Extended JSON as seen in Meteor and DDP",
   "main": "ejson.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sixolet/ejson.git"
+    "url": "git://github.com/oortcloud/ddp-ejson.git"
   },
   "keywords": [
     "JSON",
@@ -17,11 +17,11 @@
     "meteor",
     "ddp"
   ],
-  "author": "Naomi Seyfer",
+  "author": "emgee3",
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "underscore": "~1.4"
+    "underscore": "1.5.2"
   },
   "devDependencies": {
     "test": ">=0.0.5"
