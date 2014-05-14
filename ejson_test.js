@@ -46,6 +46,18 @@ exports["test ejson - nesting and literal"] = function (test) {
   test.ok(_.isEqual(obj, roundTrip));
 };
 
+exports["test ObjectID custom type"] = function (test) {
+  prepareTest(test);
+  var obj = {"$type":"oid","$value": new EJSON.ObjectID()};
+  var eObj = EJSON.toJSONValue(obj);
+  var roundTrip = EJSON.fromJSONValue(eObj);
+  test.isTrue(_.isEqual(obj, roundTrip));
+  obj = new EJSON.ObjectID("c896e40bf6e51bbdc9adcf59");
+  test.equal("c896e40bf6e51bbdc9adcf59", obj.valueOf())
+  obj = EJSON.ObjectID("c896e40bf6e51bbdc9adcf59");
+  test.equal("c896e40bf6e51bbdc9adcf59", obj.valueOf())
+};
+
 exports["test ejson - some equality tests"] = function (test) {
   prepareTest(test);
   test.isTrue(EJSON.equals({a: 1, b: 2, c: 3}, {a: 1, c: 3, b: 2}));
@@ -177,5 +189,6 @@ exports["test base64 - non-text examples"] = function (test) {
     test.ok(_.isEqual(EJSON._base64Decode(t.b64), expectedAsBinary));
   });
 };
+
 console.log(exports);
 if (module == require.main) require('test').run(exports);
