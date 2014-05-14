@@ -1,6 +1,11 @@
 var EJSON = exports; // Global!
-var customTypes = {};
 var _ = require('underscore');
+
+EJSON.ObjectID = require('./objectid.js');
+
+var customTypes = {
+  oid: function (str) { return new EJSON.ObjectID(str); }
+};
 
 // Base 64 encoding
 

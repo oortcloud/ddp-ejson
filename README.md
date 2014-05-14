@@ -35,6 +35,23 @@ to a Date object:
 
     {"$type": TYPENAME, "$value": VALUE}
 
+
+**Meteor ObjectIDs**
+
+Support for the "oid" custom type used for Meteor ObjectIDs is built-in:
+
+	{"$type": "oid", "$value": "c896e40bf6e51bbdc9adcf59"}
+
+ObjectIDs may also be constructed:
+
+```js
+// Create a new Random ID
+ObjID = new EJSON.ObjectID()
+
+// Create an ID with a known value
+myID = new EJSON.ObjectID("c896e40bf6e51bbdc9adcf59")
+```
+
 Implementations of EJSON should try to preserve key order where they can.  Users
 of EJSON should not rely on key order, if possible.
 
