@@ -1,7 +1,9 @@
 ejson
 =====
 
-Extended JSON library; used in DDP/[Meteor](http://meteor.com)
+[![Build Status](https://travis-ci.org/oortcloud/ddp-ejson.svg)](https://travis-ci.org/oortcloud/ddp-ejson)
+
+Extended JSON library; used in [Meteor](http://meteor.com)'s [Distributed Data Protocol](https://github.com/meteor/meteor/blob/devel/packages/livedata/DDP.md).
 
 
 EJSON is a way of embedding more than the built-in JSON types in JSON.  It
