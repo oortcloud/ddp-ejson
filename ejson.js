@@ -1,5 +1,5 @@
 var EJSON = exports; // Global!
-var _ = require('underscore');
+var _ = require('lodash');
 
 EJSON.ObjectID = require('./objectid.js');
 
@@ -219,14 +219,14 @@ var builtinConverters = [
     },
     toJSONValue: function (obj) {
       var newObj = {};
-      _.each(obj, function (value, key) {
+      _.forOwn(obj, function (value, key) {
         newObj[key] = EJSON.toJSONValue(value);
       });
       return {$escape: newObj};
     },
     fromJSONValue: function (obj) {
       var newObj = {};
-      _.each(obj.$escape, function (value, key) {
+      _.forOwn(obj.$escape, function (value, key) {
         newObj[key] = EJSON.fromJSONValue(value);
       });
       return newObj;
@@ -275,7 +275,7 @@ EJSON._adjustTypesToJSONValue = function (obj) {
     return obj;
 
   // Iterate over array or object structure.
-  _.each(obj, function (value, key) {
+  _.forOwn(obj, function (value, key) {
     if (typeof value !== 'object' && value !== undefined &&
         !isInfOrNan(value))
       return; // continue
@@ -331,7 +331,7 @@ EJSON._adjustTypesFromJSONValue = function (obj) {
   if (typeof obj !== 'object')
     return obj;
 
-  _.each(obj, function (value, key) {
+  _.forOwn(obj, function (value, key) {
     if (typeof value === 'object') {
       var changed = fromJSONValueHelper(value);
       if (value !== changed) {
@@ -445,10 +445,7 @@ EJSON.equals = function (a, b, options) {
   // fall back to structural equality of objects
   var ret;
   if (keyOrderSensitive) {
-    var bKeys = [];
-    _.each(b, function (val, x) {
-        bKeys.push(x);
-    });
+    var bKeys = _.keys(b);
     i = 0;
     ret = _.all(a, function (val, x) {
       if (i >= bKeys.length) {
@@ -518,9 +515,8 @@ EJSON.clone = function (v) {
   }
   // handle other objects
   ret = {};
-  _.each(v, function (value, key) {
+  _.forOwn(v, function (value, key) {
     ret[key] = EJSON.clone(value);
   });
   return ret;
 };
-

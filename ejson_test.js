@@ -1,5 +1,19 @@
 var EJSON = require("./ejson.js");
-var _ = require("underscore");
+var _ = require("lodash").runInContext();
+
+var reTypedArray = /^\[object \w+Array\]$/,
+    toString = Object.prototype.toString;
+
+_.mixin({
+  "isTypedArray": function(value) {
+    return value && typeof value == "object" && reTypedArray.test(toString.call(value)) || false;
+  },
+  "isEqual": _.wrap(_.isEqual, function(func, value, other, callback) {
+    value = _.isTypedArray(value) ? Array.apply(null, value) : value;
+    other = _.isTypedArray(other) ? Array.apply(null, other) : other;
+    return func(value, other, callback);
+  })
+});
 
 var prepareTest = function (test) {
   test.isTrue = test.ok;
