@@ -1,5 +1,5 @@
 var EJSON = exports; // Global!
-var _ = require('underscore');
+var _ = require('ddp-underscore-patched');
 
 EJSON.ObjectID = require('./objectid.js');
 

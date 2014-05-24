@@ -1,5 +1,5 @@
 var EJSON = require("./ejson.js");
-var _ = require("underscore");
+var _ = require("ddp-underscore-patched");
 
 var prepareTest = function (test) {
   test.isTrue = test.ok;
